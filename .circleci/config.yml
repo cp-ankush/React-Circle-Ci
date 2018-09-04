@@ -35,6 +35,9 @@ jobs:
 
       - run: mv selenium.log selenium_log.txt
 
+      - store_test_results:
+          path: test-results
+
       - store_artifacts:
           path: selenium_log.txt
           destination: selenium
