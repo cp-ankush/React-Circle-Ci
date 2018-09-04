@@ -1,5 +1,4 @@
 require('chromedriver');
-
 const webdriver = require('selenium-webdriver');
 const By = webdriver.By;
 
