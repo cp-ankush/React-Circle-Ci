@@ -8,20 +8,20 @@ jobs:
     working_directory: ~/test-circle-ci
     steps:
       - checkout
-      - run:
-          name: Update npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
+      # - run:
+      #     name: Update npm
+      #     command: 'sudo npm install -g npm@latest'
+      # - restore_cache:
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
           name: Install npm dependencies
           command: yarn install
 
-      - save_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+      # - save_cache:
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
+      #     paths:
+      #       - node_modules
 
   test:
     docker:
@@ -30,10 +30,10 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-
-          - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-
+      #     - v1-dependencies-
 
       - run:
           name: Test chromedriver
