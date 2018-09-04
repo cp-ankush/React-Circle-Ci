@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6.11.2-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-
+
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar
+      - run:
+          name: Start Selenium
+          command: |
+            java -jar -Dwebdriver.chrome.driver=./chromedriver selenium-server-standalone-3.0.1.jar -log selenium.log
+          background: true
+
+      - run:
+          name: Test chromedriver
+          command: node selenium.js
+
+      - run: mv selenium.log selenium_log.txt
+
+      - store_artifacts:
+          path: selenium_log.txt
+          destination: selenium
