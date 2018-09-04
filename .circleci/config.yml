@@ -19,6 +19,10 @@ jobs:
           command: rm -rf ./node_modules
 
       - run:
+          name: Clean cache
+          command: npm cache clean --force
+
+      - run:
           name: Install npm dependencies
           command: yarn install
 
