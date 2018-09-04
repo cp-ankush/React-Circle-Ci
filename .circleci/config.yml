@@ -13,18 +13,18 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
 
-      -run:
+      - run:
         name: Remove node_modules
         command: 'rm -rf node_modules'
 
-      -run:
+      - run:
         name: Clean cache
         command: yarn cache clean
 
       - run:
           name: Install npm dependencies
-          command: npm install
-          
+          command: yarn install
+
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
