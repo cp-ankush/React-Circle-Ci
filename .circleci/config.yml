@@ -1,6 +1,8 @@
 version: 2
 jobs:
-  build:
+
+  test:
+
     docker:
       - image: circleci/node:6.11.2-browsers
 
@@ -35,9 +37,14 @@ jobs:
 
       - run: mv selenium.log selenium_log.txt
 
-      - store_test_results:
-          path: test-results
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
 
       - store_artifacts:
-          path: selenium_log.txt
-          destination: selenium
+          path: test-results.xml
+          prefix: tests
+
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
