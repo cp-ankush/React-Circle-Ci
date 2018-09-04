@@ -5,6 +5,7 @@ jobs:
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
       - image: circleci/node:6.11.2-browsers
+    working_directory: ~/test-circle-ci
     steps:
       - checkout
       - run:
@@ -25,6 +26,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:6.11.2-browsers
+    working_directory: ~/test-circle-ci    
     steps:
       - checkout
 
