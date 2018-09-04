@@ -15,7 +15,7 @@ jobs:
 
       - run:
         name: Remove node_modules
-        command: 'rm -rf node_modules'
+        command: rm -rf node_modules
 
       - run:
         name: Clean cache
