@@ -1,14 +1,9 @@
-var webdriverio = require('webdriverio');
+require('chromedriver');
+const webdriver = require('selenium-webdriver');
+const By = webdriver.By;
 
-var options = {
-    desiredCapabilities: {
-        browserName: 'chrome'
-    }
-};
+let driver = new webdriver.Builder().forBrowser('chrome').build();
 
-webdriverio
-  .remote(options)
-  .init()
-  .url('http://localhost:3000/')
-  .saveScreenshot('buddyworks.png')
-  .end();
+driver.get('https://www.google.com');
+
+driver.findElement(By.id('lst-ib'));
