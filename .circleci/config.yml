@@ -32,11 +32,6 @@ jobs:
       - checkout
 
       - restore_cache:
-          keys:
-          - v1-dependencies-
-          - v1-dependencies-
-
-      - restore_cache:
           key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
