@@ -17,7 +17,7 @@ jobs:
 
       - run:
           name: Install npm dependencies
-          command: npm install
+          command: yarn install
 
       - save_cache:
           key: v2-dependency-cache-{{ checksum "package.json" }}
@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Install npm dependencies
-          command: npm install
+          command: yarn install
 
       - save_cache:
           key: v2-dependency-cache-{{ checksum "package.json" }}
