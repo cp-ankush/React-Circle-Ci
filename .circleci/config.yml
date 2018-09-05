@@ -8,28 +8,29 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+
+      - restore_cache:
+          key: v2-dependency-cache-{{ checksum "package.json" }}
+
       # - run:
-      #     name: Update npm
-      #     command: 'sudo npm install -g npm@latest'
-      # - restore_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-
-      - run:
-          name: Remove node_modules
-          command: rm -rf ./node_modules
-
-      - run:
-          name: Clean cache
-          command: npm cache clean --force
+      #     name: Remove the node_modules
+      #     command: rm -rf node_modules
+      #
+      # - run:
+      #     name: Clean the cache for the noe modules
+      #     command: npm cache clean --force
 
       - run:
           name: Install npm dependencies
           command: npm install
 
-      # - save_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #       - node_modules
+      - save_cache:
+          key: v2-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
 
   test:
     docker:
@@ -37,27 +38,34 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
+      #
+      - restore_cache:
+          key: v2-dependency-cache-{{ checksum "package.json" }}
 
-      - run:
-          name: Remove node_modules
-          command: rm -rf ./node_modules
-
-      - run:
-          name: Clean cache
-          command: npm cache clean --force
+      # - run:
+      #     name: Remove the node_modules
+      #     command: rm -rf node_modules
+      #
+      # - run:
+      #     name: Clean the cache for the noe modules
+      #     command: npm cache clean --force
 
       - run:
           name: Install npm dependencies
           command: npm install
 
+      - save_cache:
+          key: v2-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
       - run:
           name: Install mocha globally
           command: sudo npm install mocha -g
 
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-
-      #     - v1-dependencies-
+      # - run:
+      #     name: Run the app
+      #     command: npm run start
 
       - run:
           name: Test chromedriver
