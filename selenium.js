@@ -4,11 +4,7 @@ const By = webdriver.By;
 
 let driver = new webdriver.Builder().forBrowser('chrome').build();
 
-console.log("driver:::", driver);
-driver.get('https://www.w3schools.com/').then(res => {
-  console.log("after google:::", driver);
-});
-
+driver.get('https://www.w3schools.com/');
 
 driver.wait(until.elementLocated(By.id('navbtn_tutorials')), 20 * 1000).then(el => {
     driver.findElement(By.id('navbtn_tutorials')).click();
