@@ -4,14 +4,14 @@ const By = webdriver.By;
 
 let driver = new webdriver.Builder().forBrowser('chrome').build();
 
-driver.get('http://localhost:3000/');
+driver.get('https://www.google.com/');
 //
 // driver.wait(function() {
 //     return driver.isElementPresent(By.id('input-box'));
 // }, 3000, '\nFailed to load login page.');
 
-driver.wait(until.elementLocated(By.id('input-box')), 20 * 1000).then(el => {
-    driver.findElement(By.id('input-box')).click();
+driver.wait(until.elementLocated(By.id('lst-ib')), 20 * 1000).then(el => {
+    driver.findElement(By.id('lst-ib')).click();
 });
 
 

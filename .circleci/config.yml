@@ -43,9 +43,9 @@ jobs:
           paths:
             - node_modules
 
-      - run:
-          name: Run the app
-          command: npm run start
+      # - run:
+      #     name: Run the app
+      #     command: npm run start
 
       - run:
           name: Test chromedriver
