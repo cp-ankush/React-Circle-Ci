@@ -8,19 +8,18 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
-      - run:
-          name: Update npm
-          command: 'sudo npm install -g npm@latest'
-
+      # - run:
+      #     name: Update npm
+      #     command: 'sudo npm install -g npm@latest'
       # - restore_cache:
-      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
-          name: Remove the node_modules
-          command: rm -rf node_modules
+          name: Remove node_modules
+          command: rm -rf ./node_modules
 
       - run:
-          name: Clean the cache for the noe modules
+          name: Clean cache
           command: npm cache clean --force
 
       - run:
@@ -28,7 +27,7 @@ jobs:
           command: npm install
 
       # - save_cache:
-      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
       #     paths:
       #       - node_modules
 
@@ -38,16 +37,19 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
-      #
+
+      # - run:
+      #     name: Update npm
+      #     command: 'sudo npm install -g npm@latest'
       # - restore_cache:
-      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
-          name: Remove the node_modules
-          command: rm -rf node_modules
+          name: Remove node_modules
+          command: rm -rf ./node_modules
 
       - run:
-          name: Clean the cache for the noe modules
+          name: Clean cache
           command: npm cache clean --force
 
       - run:
@@ -55,17 +57,13 @@ jobs:
           command: npm install
 
       # - save_cache:
-      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     key: v1-dependency-cache-{{ checksum "package.json" }}
       #     paths:
-      #       - node_modules
-
-      # - run:
-      #     name: Run the app
-      #     command: npm run start
+      #       - node_modules    
 
       - run:
           name: Test chromedriver
-          command: mocha selenium.js
+          command: node selenium.js
 
 workflows:
   version: 2
