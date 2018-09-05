@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "chromedriver": "^2.12.0",
+    "mocha": "^5.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.5",
@@ -14,8 +15,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "mocha": "^5.2.0"
   }
 }
