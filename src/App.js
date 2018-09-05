@@ -13,6 +13,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <input type="text" style={{height: "20px", width: "50px"}} id="input-box"/>
       </div>
     );
   }
