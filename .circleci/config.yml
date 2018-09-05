@@ -50,6 +50,10 @@ jobs:
           name: Install npm dependencies
           command: npm install
 
+      - run:
+          name: Install mocha globally
+          command: npm install mocha -g
+
       # - restore_cache:
       #     keys:
       #     - v1-dependencies-
