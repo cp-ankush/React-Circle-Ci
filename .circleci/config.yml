@@ -4,7 +4,7 @@ jobs:
   build:
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:6.11.2-browsers
     working_directory: ~/react-circle-ci
     steps:
       - checkout
@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Remove node_modules
-          command: rm -rf /home/circleci/react-circle-ci/node_modules
+          command: rm -rf ./node_modules
 
       - run:
           name: Clean cache
@@ -33,37 +33,19 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:6.11.2-browsers
     working_directory: ~/react-circle-ci
     steps:
       - checkout
 
-      # - run:
-      #     name: Update npm
-      #     command: 'sudo npm install -g npm@latest'
       # - restore_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-
-      - run:
-          name: Remove node_modules
-          command: rm -rf /home/circleci/react-circle-ci/node_modules
-
-      - run:
-          name: Clean cache
-          command: npm cache clean --force
-
-      - run:
-          name: Install npm dependencies
-          command: npm install
-
-      # - save_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #       - node_modules
-
+      #     keys:
+      #     - v1-dependencies-
+      #     - v1-dependencies-
+      
       - run:
           name: Test chromedriver
-          command: mocha selenium.js
+          command: node selenium.js
 
 workflows:
   version: 2
