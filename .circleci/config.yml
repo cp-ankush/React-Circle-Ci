@@ -52,7 +52,7 @@ jobs:
 
       - run:
           name: Install mocha globally
-          command: npm install mocha -g
+          command: sudo npm install mocha -g
 
       # - restore_cache:
       #     keys:
