@@ -1,31 +1,31 @@
-const webdriver = require('selenium-webdriver');
-const {until} = require('selenium-webdriver');
-const By = webdriver.By;
+const {Builder, By, Key, until} = require('selenium-webdriver');
+const test = require('selenium-webdriver/testing');
 
-let driver = new webdriver.Builder().forBrowser('chrome').build();
+let driver;
 
-driver.get('https://www.w3schools.com/');
+test.describe("App test cases", function() {
 
-driver.wait(until.elementLocated(By.id('navbtn_tutorials')), 20 * 1000).then(el => {
-    driver.findElement(By.id('navbtn_tutorials')).click();
-});
-//
-// driver.wait(function() {
-//     return driver.isElementPresent(By.id('input-box'));
-// }, 3000, '\nFailed to load login page.');
+  test.before(function *() {
+     driver = new Builder().forBrowser('chrome').build();
+   });
 
+   test.it("Open the site", function(done) {
+     this.timeout(20000);
+     driver.get('https://www.w3schools.com/').then((res) => {
+       done();
+     })
+   })
 
+  test.it("click the nav tutorials button", function(done){
+    this.timeout(20000);
+    driver.wait(until.elementLocated(By.id('navbtn_tutorials')), 20 * 1000).then(el => {
+      driver.findElement(By.id('navbtn_tutorials')).click().then(() => {
+        done();
+      });
+    });
+  });
 
-
-
-// const {Builder, By, Key, until} = require('selenium-webdriver');
-//
-// (async function example() {
-//   let driver = await new Builder().forBrowser('chrome').build();
-//   try {
-//     await driver.get('http://localhost:3000/');
-//     await driver.findElement(By.id('input-box')).click();
-//   } finally {
-//     await driver.quit();
-//   }
-// })();
+  test.after(() => {
+    driver.quit()
+  });
+})

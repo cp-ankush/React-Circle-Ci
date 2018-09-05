@@ -49,7 +49,7 @@ jobs:
 
       - run:
           name: Test chromedriver
-          command: node selenium.js
+          command: mocha selenium.js
 
 workflows:
   version: 2
