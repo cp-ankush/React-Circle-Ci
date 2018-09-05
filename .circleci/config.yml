@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Remove node_modules
-          command: rm -rf ./node_modules
+          command: rm -rf /home/circleci/react-circle-ci/node_modules
 
       - run:
           name: Clean cache
@@ -46,7 +46,7 @@ jobs:
 
       - run:
           name: Remove node_modules
-          command: rm -rf ./node_modules
+          command: rm -rf /home/circleci/react-circle-ci/node_modules
 
       - run:
           name: Clean cache
