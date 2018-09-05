@@ -59,11 +59,11 @@ jobs:
       # - save_cache:
       #     key: v1-dependency-cache-{{ checksum "package.json" }}
       #     paths:
-      #       - node_modules    
+      #       - node_modules
 
       - run:
           name: Test chromedriver
-          command: node selenium.js
+          command: mocha selenium.js
 
 workflows:
   version: 2
