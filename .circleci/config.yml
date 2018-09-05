@@ -13,14 +13,14 @@ jobs:
           command: 'sudo npm install -g npm@latest'
 
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
+          key: v2-dependency-cache-{{ checksum "package.json" }}
 
       - run:
           name: Install npm dependencies
           command: npm install
 
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
+          key: v2-dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
 
@@ -32,14 +32,14 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
+          key: v2-dependency-cache-{{ checksum "package.json" }}
 
       - run:
           name: Install npm dependencies
           command: npm install
 
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "package.json" }}
+          key: v2-dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
 
