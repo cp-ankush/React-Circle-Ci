@@ -44,6 +44,10 @@ jobs:
       #     - v1-dependencies-
 
       - run:
+          name: Install npm dependencies
+          command: npm install
+
+      - run:
           name: Test chromedriver
           command: node selenium.js
 
