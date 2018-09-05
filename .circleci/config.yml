@@ -12,17 +12,25 @@ jobs:
           name: Update npm
           command: 'sudo npm install -g npm@latest'
 
-      - restore_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
+      # - restore_cache:
+      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+
+      - run:
+          name: Remove the node_modules
+          command: rm -rf node_modules
+
+      - run:
+          name: Clean the cache for the noe modules
+          command: npm cache clean --force
 
       - run:
           name: Install npm dependencies
           command: yarn install
 
-      - save_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+      # - save_cache:
+      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     paths:
+      #       - node_modules
 
   test:
     docker:
@@ -30,18 +38,26 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
+      #
+      # - restore_cache:
+      #     key: v2-dependency-cache-{{ checksum "package.json" }}
 
-      - restore_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Remove the node_modules
+          command: rm -rf node_modules
+
+      - run:
+          name: Clean the cache for the noe modules
+          command: npm cache clean --force
 
       - run:
           name: Install npm dependencies
           command: yarn install
 
-      - save_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+      # - save_cache:
+      #     key: v2-dependency-cache-{{ checksum "package.json" }}
+      #     paths:
+      #       - node_modules
 
       # - run:
       #     name: Run the app
