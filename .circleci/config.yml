@@ -8,28 +8,21 @@ jobs:
     working_directory: ~/react-circle-ci
     steps:
       - checkout
-      # - run:
-      #     name: Update npm
-      #     command: 'sudo npm install -g npm@latest'
-      # - restore_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-
       - run:
-          name: Remove node_modules
-          command: rm -rf ./node_modules
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
 
-      - run:
-          name: Clean cache
-          command: npm cache clean --force
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
           name: Install npm dependencies
           command: npm install
 
-      # - save_cache:
-      #     key: v1-dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #       - node_modules
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
 
   test:
     docker:
@@ -38,14 +31,22 @@ jobs:
     steps:
       - checkout
 
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-
-      #     - v1-dependencies-
+      - restore_cache:
+          keys:
+          - v1-dependencies-
+          - v1-dependencies-
+
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
 
       - run:
           name: Install npm dependencies
           command: npm install
+
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
 
       - run:
           name: Test chromedriver
