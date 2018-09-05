@@ -10,7 +10,7 @@ driver.get('http://localhost:3000/');
 //     return driver.isElementPresent(By.id('input-box'));
 // }, 3000, '\nFailed to load login page.');
 
-driver.wait(until.elementLocated(By.id('input-box')), 10 * 1000).then(el => {
+driver.wait(until.elementLocated(By.id('input-box')), 20 * 1000).then(el => {
     driver.findElement(By.id('input-box')).click();
 });
 
